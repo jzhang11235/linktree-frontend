@@ -12,10 +12,10 @@ const Link = styled.a`
   width: 100%;
   height: 48px;
   border-radius: 4px;
-  background: #39e09b;
+  background: ${props => props.theme.colors.background};
   font-size: 14px;
   text-align: center;
-  color: #263238;
+  color: ${props => props.theme.colors.text};
   transition: filter 0.25s ease-in;
   &:hover {
     filter: invert(1);

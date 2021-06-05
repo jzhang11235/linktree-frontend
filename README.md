@@ -1,46 +1,44 @@
-# Getting Started with Create React App
+<p align="center">
+  <img src="https://github.com/blstrco/linktr.ee-backend-assessment/raw/master/Screen%20Shot%202019-07-08%20at%202.09.47%20pm.png">
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# The Problem
+We have three new link types for our users profile pages, such as https://linktr.ee/guardian
 
-## Available Scripts
+1. Classic
+	- Accepts a single URL.
+	- Opens the URL in a new tab.
 
-In the project directory, you can run:
+2. Music Player 
+	- On click, the link type displays a set of links to music streaming platforms where you can find the song.
+	- Clicking on an element inside of the Music Link will open an audio player for that song, powered by that platform.
+	- Clicking on the logo of the platform of an element will take you to that song, in that platform.
 
-### `npm start`
+3. Shows List
+	- On click, the link type displays a list of links to upcoming events.
+	- Clicking on an upcoming event will navigate to the event in SongKick.
+	
+You are required to create the front end components for the new features as per the assets provided via Zeplin below (Front End Assets)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Design Considerations
+  - All links are globally themed by the users preferences (usually available via API e.g `{background_color: "rebeccapurple", text_color:  "palegoldenrod" }`).
+  - All links invert colour on hover.
+  
+## Your Solution
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Consider re-usability through composition.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Rules & Tips
+- Use of ReactJS will be looked upon favourably.
+- You cannot connect to a real world API - mock any data sets that you require.
+- @todo comments are encouraged. You aren't expected to complete the challenge, but how you design your solution and your ideas for the future are important.
+- Commit your work and submit Pull Requests as you would in real life.
 
-### `npm run build`
+## Front End Assets
+A sketch file is available within this repository, and an online version of the asset is available at Zeplin.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+https://zpl.io/awXO8EJ
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Submission
+To submit this assessment, please create a new repository and submit the link when you're done.

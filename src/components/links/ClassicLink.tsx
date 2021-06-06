@@ -23,7 +23,11 @@ const Link = styled.a`
 `;
 
 const ClassicLink = (props: ClassicLinkProps) => {
-  return <Link href={props.to}>{props.label}</Link>;
+  return (
+    <Link href={props.to} target="_blank">
+      {props.label}
+    </Link>
+  );
 };
 
 export default ClassicLink;

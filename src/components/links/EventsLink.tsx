@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import styled from 'styled-components';
+import { animated, useSpring } from 'react-spring';
 import Link from './Link';
 import { SongkickEvent } from '../../types';
 import { ReactComponent as RightArrow } from '../../assets/right-arrow.svg';
 import { ReactComponent as SongkickWordmark } from '../../assets/by-songkick-wordmark.svg';
+
+const EventLinkHeight = 72;
+const WordmarkHeight = 48;
 
 export type EventsLinkProps = {
   label: string;
@@ -13,6 +17,10 @@ export type EventsLinkProps = {
 const ExpandableLinkContainer = styled.div`
   border-radius: 4px;
   background: #f5f7f8;
+`;
+
+const Content = styled(animated.div)`
+  overflow: hidden;
 `;
 
 const List = styled.ul`
@@ -25,7 +33,7 @@ const List = styled.ul`
 `;
 
 const EventLink = styled.a`
-  height: 72px;
+  height: ${EventLinkHeight}px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,44 +53,52 @@ const EventInfo = styled.div`
 `;
 
 const WordmarkContainer = styled.div`
-  height: 48px;
+  height: ${WordmarkHeight}px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const EventsLink = (props: EventsLinkProps) => {
-  const [showEvents, setShowEvents] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+
+  const contentHeight = useMemo(() => {
+    return props.events.length * EventLinkHeight + WordmarkHeight;
+  }, [props.events]);
+
+  const contentStyles = useSpring(
+    showContent
+      ? { opacity: 1, height: `${contentHeight}px` }
+      : { opacity: 0, height: '0px' }
+  );
 
   return (
     <ExpandableLinkContainer>
-      <Link as="button" onClick={() => setShowEvents(!showEvents)}>
+      <Link as="button" onClick={() => setShowContent(!showContent)}>
         {props.label}
       </Link>
-      {showEvents && (
-        <>
-          <List>
-            {props.events.map(event => (
-              <li key={event.id}>
-                <EventLink href={event.url} target="_blank">
-                  <div>
-                    <EventDate>{event.date}</EventDate>
-                    <EventInfo>{event.location}</EventInfo>
-                  </div>
-                  {event.soldOut ? (
-                    <EventInfo>Sold out</EventInfo>
-                  ) : (
-                    <RightArrow />
-                  )}
-                </EventLink>
-              </li>
-            ))}
-          </List>
-          <WordmarkContainer>
-            <SongkickWordmark />
-          </WordmarkContainer>
-        </>
-      )}
+      <Content style={contentStyles} aria-hidden={!showContent}>
+        <List>
+          {props.events.map(event => (
+            <li key={event.id}>
+              <EventLink href={event.url} target="_blank">
+                <div>
+                  <EventDate>{event.date}</EventDate>
+                  <EventInfo>{event.location}</EventInfo>
+                </div>
+                {event.soldOut ? (
+                  <EventInfo>Sold out</EventInfo>
+                ) : (
+                  <RightArrow />
+                )}
+              </EventLink>
+            </li>
+          ))}
+        </List>
+        <WordmarkContainer>
+          <SongkickWordmark />
+        </WordmarkContainer>
+      </Content>
     </ExpandableLinkContainer>
   );
 };

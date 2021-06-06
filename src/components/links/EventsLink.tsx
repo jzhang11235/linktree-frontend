@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { animated, useSpring } from 'react-spring';
 import Link from './Link';
+import ExpandableLinkContainer from './ExpandableLinkContainer';
 import { SongkickEvent } from '../../types';
 import { ReactComponent as RightArrow } from '../../assets/right-arrow.svg';
 import { ReactComponent as SongkickWordmark } from '../../assets/by-songkick-wordmark.svg';
@@ -13,12 +14,6 @@ export type EventsLinkProps = {
   label: string;
   events: SongkickEvent[];
 };
-
-const ExpandableLinkContainer = styled.div`
-  border-radius: 4px;
-  background: #f5f7f8;
-  color: ${props => props.theme.colors.text};
-`;
 
 const Content = styled(animated.div)`
   overflow: hidden;

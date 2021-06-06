@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ExpandableLink from './ExpandableLink';
+import musicPlatformInfo from './musicPlatformInfo';
 import { Song } from '../../types';
 import { ReactComponent as RightArrow } from '../../assets/right-arrow.svg';
 
@@ -39,6 +40,12 @@ const PlatformContainer = styled.div`
   position: relative;
 `;
 
+const ExternalLink = styled.a`
+  display: block;
+  padding: 12px 16px;
+  line-height: 0;
+`;
+
 const PlayEmbedButton = styled.button`
   width: 100%;
   height: 100%;
@@ -59,16 +66,22 @@ const MusicLink = (props: MusicLinkProps) => {
   return (
     <ExpandableLink label={props.label} height={height}>
       <List>
-        {props.song.links.map(link => (
-          <li key={link.platform}>
-            <PlatformContainer>
-              <PlayEmbedButton>
-                {link.platform}
-                <RightArrow />
-              </PlayEmbedButton>
-            </PlatformContainer>
-          </li>
-        ))}
+        {props.song.links.map(link => {
+          const { displayName, iconUrl } = musicPlatformInfo[link.platform];
+          return (
+            <li key={link.platform}>
+              <PlatformContainer>
+                <ExternalLink href={link.externalUrl} target="_blank">
+                  <img src={iconUrl} alt="" />
+                </ExternalLink>
+                <PlayEmbedButton>
+                  {displayName}
+                  <RightArrow />
+                </PlayEmbedButton>
+              </PlatformContainer>
+            </li>
+          );
+        })}
       </List>
     </ExpandableLink>
   );

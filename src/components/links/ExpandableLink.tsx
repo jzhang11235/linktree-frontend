@@ -22,11 +22,7 @@ const Content = styled(animated.div)`
 const ExpandableLink = (props: ExpandableLinkProps) => {
   const [showContent, setShowContent] = useState(false);
 
-  const styles = useSpring(
-    showContent
-      ? { opacity: 1, height: `${props.height}px` }
-      : { opacity: 0, height: '0px' }
-  );
+  const styles = useSpring({ height: `${showContent ? props.height : 0}px` });
 
   return (
     <ExpandableLinkContainer>

@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import styled from 'styled-components';
 import ExpandableLink from './ExpandableLink';
 import { Song } from '../../types';
@@ -17,6 +16,19 @@ const List = styled.ul`
   li {
     list-style: none;
     margin: 0;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: calc(100% - 56px);
+      height: 1px;
+      background: #dadee0;
+    }
+    &:last-child::after {
+      display: none;
+    }
   }
 `;
 
@@ -32,7 +44,6 @@ const PlayEmbedButton = styled.button`
   height: 100%;
   padding: 0 16px 0 0;
   border: 0;
-  border-bottom: 1px solid #dadee0;
   background: transparent;
   cursor: pointer;
   display: flex;
@@ -43,14 +54,12 @@ const PlayEmbedButton = styled.button`
 `;
 
 const MusicLink = (props: MusicLinkProps) => {
-  const contentHeight = useMemo(() => {
-    return props.song.links.length * PlatformLinkHeight;
-  }, [props.song]);
+  const height = props.song.links.length * PlatformLinkHeight;
 
   return (
-    <ExpandableLink label={props.label} height={contentHeight}>
+    <ExpandableLink label={props.label} height={height}>
       <List>
-        {props.song.links.map((link, i) => (
+        {props.song.links.map(link => (
           <li key={link.platform}>
             <PlatformContainer>
               <PlayEmbedButton>

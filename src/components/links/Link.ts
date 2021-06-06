@@ -12,6 +12,7 @@ const Link = styled.a`
   background: ${props => props.theme.colors.background};
   font-size: 14px;
   text-align: center;
+  text-decoration: none;
   color: ${props => props.theme.colors.text};
   cursor: pointer;
   transition: filter 0.25s ease-in;

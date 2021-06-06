@@ -41,6 +41,7 @@ const EventLink = styled.a`
   padding-right: 16px;
   border-bottom: 1px solid #dadee0;
   color: inherit;
+  text-decoration: none;
 `;
 
 const EventDate = styled.div`

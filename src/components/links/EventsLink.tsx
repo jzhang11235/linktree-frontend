@@ -17,6 +17,7 @@ export type EventsLinkProps = {
 const ExpandableLinkContainer = styled.div`
   border-radius: 4px;
   background: #f5f7f8;
+  color: ${props => props.theme.colors.text};
 `;
 
 const Content = styled(animated.div)`

@@ -26,14 +26,6 @@ it('renders label from prop', () => {
   expect(screen.getByRole('button')).toHaveTextContent(label);
 });
 
-it('expands and collapses event list on click', () => {
-  render(<EventsLink label="label" events={events} />);
-  userEvent.click(screen.getByRole('button'));
-  expect(screen.getByRole('list')).toBeInTheDocument();
-  userEvent.click(screen.getByRole('button'));
-  expect(screen.queryByRole('list')).not.toBeInTheDocument();
-});
-
 it('renders events from prop as list items', () => {
   render(<EventsLink label="label" events={events} />);
   userEvent.click(screen.getByRole('button'));

@@ -20,6 +20,7 @@ const List = styled.ul`
   padding-left: 16px;
   li {
     list-style: none;
+    margin: 0;
   }
 `;
 

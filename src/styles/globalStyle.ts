@@ -17,6 +17,10 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  button {
+    font-family: inherit;
+  }
 `;
 
 export default GlobalStyle;

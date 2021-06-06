@@ -38,7 +38,7 @@ const EventDate = styled.div`
   line-height: 28px;
 `;
 
-const EventLocation = styled.div`
+const EventInfo = styled.div`
   font-size: 12px;
   line-height: 24px;
 `;
@@ -66,9 +66,13 @@ const EventsLink = (props: EventsLinkProps) => {
                 <EventLink href={event.url} target="_blank">
                   <div>
                     <EventDate>{event.date}</EventDate>
-                    <EventLocation>{event.location}</EventLocation>
+                    <EventInfo>{event.location}</EventInfo>
                   </div>
-                  <RightArrow />
+                  {event.soldOut ? (
+                    <EventInfo>Sold out</EventInfo>
+                  ) : (
+                    <RightArrow />
+                  )}
                 </EventLink>
               </li>
             ))}

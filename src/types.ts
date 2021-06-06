@@ -2,6 +2,6 @@ export type SongkickEvent = {
   id: string;
   date: string;
   location: string;
-  available: boolean;
+  soldOut: boolean;
   url: string;
 };

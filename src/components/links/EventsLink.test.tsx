@@ -8,14 +8,14 @@ const events: SongkickEvent[] = [
     id: 'a',
     date: 'Apr 01 2019',
     location: 'The Forum, Melbourne',
-    available: true,
+    soldOut: true,
     url: 'https://example.com/',
   },
   {
     id: 'b',
     date: 'Apr 02 2019',
     location: 'Venue Name, Canberra',
-    available: false,
+    soldOut: false,
     url: '#',
   },
 ];
@@ -53,4 +53,11 @@ it('points to event url', () => {
   userEvent.click(screen.getByRole('button'));
   const firstLink = screen.getAllByRole('link')[0];
   expect(firstLink).toHaveAttribute('href', 'https://example.com/');
+});
+
+it('renders "sold out" if event is sold out', () => {
+  render(<EventsLink label="label" events={events} />);
+  userEvent.click(screen.getByRole('button'));
+  const firstEvent = screen.getAllByRole('listitem')[0];
+  expect(firstEvent).toHaveTextContent('Sold out');
 });

@@ -4,7 +4,7 @@ import ExpandableLink from './ExpandableLink';
 
 it('expands and collapses event list on click', () => {
   render(
-    <ExpandableLink label="label" height={100}>
+    <ExpandableLink label="label" childHeight={100}>
       <h1>head</h1>
     </ExpandableLink>
   );

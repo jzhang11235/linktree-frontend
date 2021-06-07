@@ -62,7 +62,7 @@ const EventsLink = (props: EventsLinkProps) => {
   const height = props.events.length * EventLinkHeight + WordmarkHeight;
 
   return (
-    <ExpandableLink label={props.label} height={height}>
+    <ExpandableLink label={props.label} childHeight={height}>
       <List>
         {props.events.map(event => (
           <li key={event.id}>

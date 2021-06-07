@@ -5,7 +5,7 @@ import Link from './Link';
 
 type ExpandableLinkProps = {
   label: string;
-  height: number;
+  childHeight: number;
   children: React.ReactNode;
 };
 
@@ -22,7 +22,9 @@ const Content = styled(animated.div)`
 const ExpandableLink = (props: ExpandableLinkProps) => {
   const [showContent, setShowContent] = useState(false);
 
-  const styles = useSpring({ height: `${showContent ? props.height : 0}px` });
+  const styles = useSpring({
+    height: `${showContent ? props.childHeight : 0}px`,
+  });
 
   return (
     <ExpandableLinkContainer>

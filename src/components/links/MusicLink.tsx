@@ -83,7 +83,7 @@ const MusicLink = (props: MusicLinkProps) => {
   const styles = useSpring({ height: `${embedHeight}px` });
 
   return (
-    <ExpandableLink label={props.label} height={contentHeight}>
+    <ExpandableLink label={props.label} childHeight={contentHeight}>
       <EmbedPlayer style={styles} aria-hidden={!showEmbed}>
         Music player placeholder
       </EmbedPlayer>

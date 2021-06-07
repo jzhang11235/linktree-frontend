@@ -1,7 +1,5 @@
-import { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { animated, useSpring } from 'react-spring';
-import Link from './Link';
+import ExpandableLink from './ExpandableLink';
 import { SongkickEvent } from '../../types';
 import { ReactComponent as RightArrow } from '../../assets/right-arrow.svg';
 import { ReactComponent as SongkickWordmark } from '../../assets/by-songkick-wordmark.svg';
@@ -14,22 +12,22 @@ export type EventsLinkProps = {
   events: SongkickEvent[];
 };
 
-const ExpandableLinkContainer = styled.div`
-  border-radius: 4px;
-  background: #f5f7f8;
-  color: ${props => props.theme.colors.text};
-`;
-
-const Content = styled(animated.div)`
-  overflow: hidden;
-`;
-
 const List = styled.ul`
   margin: 0;
-  padding-left: 16px;
+  padding: 0;
   li {
     list-style: none;
     margin: 0;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: calc(100% - 16px);
+      height: 1px;
+      background: #dadee0;
+    }
   }
 `;
 
@@ -38,8 +36,7 @@ const EventLink = styled.a`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-right: 16px;
-  border-bottom: 1px solid #dadee0;
+  padding: 0 16px;
   color: inherit;
   text-decoration: none;
 `;
@@ -62,46 +59,27 @@ const WordmarkContainer = styled.div`
 `;
 
 const EventsLink = (props: EventsLinkProps) => {
-  const [showContent, setShowContent] = useState(false);
-
-  const contentHeight = useMemo(() => {
-    return props.events.length * EventLinkHeight + WordmarkHeight;
-  }, [props.events]);
-
-  const contentStyles = useSpring(
-    showContent
-      ? { opacity: 1, height: `${contentHeight}px` }
-      : { opacity: 0, height: '0px' }
-  );
+  const height = props.events.length * EventLinkHeight + WordmarkHeight;
 
   return (
-    <ExpandableLinkContainer>
-      <Link as="button" onClick={() => setShowContent(!showContent)}>
-        {props.label}
-      </Link>
-      <Content style={contentStyles} aria-hidden={!showContent}>
-        <List>
-          {props.events.map(event => (
-            <li key={event.id}>
-              <EventLink href={event.url} target="_blank">
-                <div>
-                  <EventDate>{event.date}</EventDate>
-                  <EventInfo>{event.location}</EventInfo>
-                </div>
-                {event.soldOut ? (
-                  <EventInfo>Sold out</EventInfo>
-                ) : (
-                  <RightArrow />
-                )}
-              </EventLink>
-            </li>
-          ))}
-        </List>
-        <WordmarkContainer>
-          <SongkickWordmark />
-        </WordmarkContainer>
-      </Content>
-    </ExpandableLinkContainer>
+    <ExpandableLink label={props.label} height={height}>
+      <List>
+        {props.events.map(event => (
+          <li key={event.id}>
+            <EventLink href={event.url} target="_blank">
+              <div>
+                <EventDate>{event.date}</EventDate>
+                <EventInfo>{event.location}</EventInfo>
+              </div>
+              {event.soldOut ? <EventInfo>Sold out</EventInfo> : <RightArrow />}
+            </EventLink>
+          </li>
+        ))}
+      </List>
+      <WordmarkContainer>
+        <SongkickWordmark />
+      </WordmarkContainer>
+    </ExpandableLink>
   );
 };
 

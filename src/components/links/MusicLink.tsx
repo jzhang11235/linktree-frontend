@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import { animated, useSpring } from 'react-spring';
 import ExpandableLink from './ExpandableLink';
 import musicPlatformInfo from './musicPlatformInfo';
 import { Song } from '../../types';
 import { ReactComponent as RightArrow } from '../../assets/right-arrow.svg';
 
 const PlatformLinkHeight = 48;
+const EmbedPlayerHeight = 100;
 
 export type MusicLinkProps = {
   label: string;
@@ -60,11 +63,24 @@ const PlayEmbedButton = styled.button`
   line-height: 28px;
 `;
 
+const EmbedPlayer = styled(animated.div)`
+  overflow: hidden;
+`;
+
 const MusicLink = (props: MusicLinkProps) => {
-  const height = props.song.links.length * PlatformLinkHeight;
+  const [showEmbed, setShowEmbed] = useState(false);
+
+  const embedHeight = showEmbed ? EmbedPlayerHeight : 0;
+  const contentHeight =
+    props.song.links.length * PlatformLinkHeight + embedHeight;
+
+  const styles = useSpring({ height: `${embedHeight}px` });
 
   return (
-    <ExpandableLink label={props.label} height={height}>
+    <ExpandableLink label={props.label} height={contentHeight}>
+      <EmbedPlayer style={styles} aria-hidden={!showEmbed}>
+        Music player placeholder
+      </EmbedPlayer>
       <List>
         {props.song.links.map(link => {
           const { displayName, iconUrl } = musicPlatformInfo[link.platform];
@@ -74,7 +90,7 @@ const MusicLink = (props: MusicLinkProps) => {
                 <ExternalLink href={link.externalUrl} target="_blank">
                   <img src={iconUrl} alt="" />
                 </ExternalLink>
-                <PlayEmbedButton>
+                <PlayEmbedButton onClick={() => setShowEmbed(!showEmbed)}>
                   {displayName}
                   <RightArrow />
                 </PlayEmbedButton>

@@ -6,6 +6,12 @@ import musicPlatformInfo from './musicPlatformInfo';
 import { Song } from '../../types';
 import { ReactComponent as RightArrow } from '../../assets/right-arrow.svg';
 
+/**
+ * @todo
+ * Implement embed music player.
+ * What happens if link is collapsed while a track is playing?
+ */
+
 const PlatformLinkHeight = 48;
 const EmbedPlayerHeight = 100;
 
